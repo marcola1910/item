@@ -1,0 +1,50 @@
+<wicket:panel>
+
+	<form wicket:id="userForm">
+		<p>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+
+			</tr>
+			<tr>
+				<td>Oid ::</td>
+				<td><span wicket:id="Oid"> New One </span></td>
+
+			</tr>
+
+			<tr>
+				<td>Email ::</td>
+				<td><input title="email" type="email" name="email"
+					class="username" wicket:id="Email" /></td>
+			</tr>
+			<tr>
+				<td>Nombre::</td>
+				<td><input type="text" title="nombre" id="nombre" name="nombre"
+					wicket:id="Nombre" /></td>
+			</tr>
+			<tr>
+				<td>Telefono ::</td>
+				<td><input name="telefono" type="text" title="telefono"
+					class="username" id="telefono" wicket:id="Telefono" /></td>
+			</tr>
+			<tr>
+				<td>Password ::</td>
+				<td><input title="Password" type="password" name="pwd"
+					class="password" wicket:id="Password" /> <br /></td>
+			</tr>
+			<tr>
+				<td align="right"><input type="reset" name="reset"
+					class="submit" value="Clear" tabindex="3" /></td>
+				<td align="right"><input type="submit" name="Login"
+					class="submit" value="Save" tabindex="3" /></td>
+			</tr>
+			<tr>
+				<td><span wicket:id="mfeed"> SNAPSHOT </span></td>
+				<td></td>
+			</tr>
+		</table>
+		</p>
+	</form>
+</wicket:panel>

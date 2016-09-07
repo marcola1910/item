@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.exnihilo.Item.model.Item">
+	<class name="org.exnihilo.Item.model.Item" table="ITEM" catalog="itemproj"
+		dynamic-update="true">
+
+
+		<id name="dbId" type="java.lang.Integer">
+			<column name="dbId_item" />
+			<generator class="identity" />
+		</id>
+
+		<property name="oid" type="string" />
+
+		<property name="titulo" type="string" />
+		<property name="descripcion" type="string" />
+		<property name="fecha" />
+
+		<property name="version" type="java.lang.Integer" />
+
+		<many-to-one name="asignado" lazy="proxy" cascade="all"
+			column="asignado" class="org.exnihilo.Item.model.MiembroEquipo" />
+
+
+		<bag name="historiales" table="HISTORIAL_ITEM" lazy="extra"
+			catalog="itemproj" cascade="all">
+			<key column="dbId_item" not-null="false" />
+			<many-to-many class="org.exnihilo.Item.model.Historial" />
+		</bag>
+
+
+		<many-to-one name="type" lazy="proxy" cascade="all"
+			column="type" class="org.exnihilo.Item.model.ItemType" />
+
+		<many-to-one name="proyecto" lazy="proxy" cascade="all"
+			column="proyecto" class="org.exnihilo.Item.model.ProyectoSoftware" />
+
+		<many-to-one name="estado" lazy="proxy" cascade="all"
+			column="estado" class="org.exnihilo.Item.model.Nodo" />
+
+	</class>
+</hibernate-mapping> 

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.exnihilo.Item.model.ItemSys">
+	<class name="org.exnihilo.Item.model.ItemSys" table="ITEMSYS"
+		catalog="itemproj" mutable="true" dynamic-update="true">
+
+		<id name="oid">
+			<column name="oid_itemsys" />
+			<generator class="assigned" />
+		</id>
+
+		<bag name="equipos" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.Equipo" />
+		</bag>
+
+		<bag name="itens" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.Item" />
+		</bag>
+
+		<bag name="proyectos" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.ProyectoSoftware" />
+		</bag>
+
+		<bag name="puestos" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.Puesto" />
+		</bag>
+
+		<bag name="tiposItem" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.ItemType" />
+		</bag>
+
+		<bag name="usuarios" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.Usuario" />
+		</bag>
+
+		<bag name="workflows" lazy="extra" cascade="all">
+			<key column="oid_itemsys" not-null="false" />
+			<one-to-many class="org.exnihilo.Item.model.WorkFlow" />
+		</bag>
+
+	</class>
+</hibernate-mapping> 

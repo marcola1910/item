@@ -1,0 +1,26 @@
+<wicket:extend>
+	<br />
+	<h2>Proyectos</h2>
+	<p>
+	<div style="font-family: verdana; color: white" align="right">
+		Logged User :: <span wicket:id="loggedUser"></span>
+	</div>
+	</p>
+	<div wicket:id="pryctDataFields"></div>
+
+	<div class="cssDataTable">
+		<table>
+			<tr>
+				<th>Oid</th>
+				<th>Nombre</th>
+				<th>Equipo</th>
+				<th>Edit</th>
+				<th>Remove</th>
+			</tr>
+			<tr wicket:id="rows">
+				<td wicket:id="dataRow"><a whicket:id="editLink">Click</a></td>
+			</tr>
+		</table>
+	</div>
+
+</wicket:extend>

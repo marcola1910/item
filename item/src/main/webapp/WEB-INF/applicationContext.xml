@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	<!-- Objeto utilizado para configurar hibernate -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>/WEB-INF/jdbc.properties</value>
+		</property>
+	</bean>
+
+	<!-- Datos para la conexión de hibernate -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="jdbcUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+
+	<bean id="beanDatasource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+
+
+	<!-- SessionFactory de hibernate -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<!-- <ref local="dataSource" /> -->
+			<ref local="beanDatasource" />
+		</property>
+		<property name="mappingResources">
+			<list>
+				<value>org/exnihilo/Item/model/Equipo.hbm.xml</value>
+				<value>org/exnihilo/Item/model/Nodo.hbm.xml</value>
+				<value>org/exnihilo/Item/model/ItemType.hbm.xml</value>
+				<value>org/exnihilo/Item/model/ProyectoSoftware.hbm.xml</value>
+				<value>org/exnihilo/Item/model/Usuario.hbm.xml</value>
+				<value>org/exnihilo/Item/model/Puesto.hbm.xml</value>
+				<value>org/exnihilo/Item/model/Item.hbm.xml</value>
+				<value>org/exnihilo/Item/model/Historial.hbm.xml</value>
+				<value>org/exnihilo/Item/model/WorkFlow.hbm.xml</value>
+				<value>org/exnihilo/Item/model/ItemSys.hbm.xml</value>
+
+			</list>
+		</property>
+
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.c3p0.idle_test_period">28680</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+
+				<prop key="hibernate.cache.use_query_cache">false</prop>
+
+			</props>
+		</property>
+	</bean>
+
+	<!-- Objeto utilizado para administrar las transacciones -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+
+	<!-- Repositorios -->
+
+	<bean id="equipoRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.EquipoRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="estadoRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.EstadoRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="itemSysRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.ItemSysRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="itensRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.ItensRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="itemTypeRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.ItemTypeRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="proyectosSoftwareRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.ProyectosRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="puestoRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.PuestoRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="usuarioRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.UsuarioRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="workFlowRepository"
+		class="org.exnihilo.Item.repositories.impl.hibernate.WorkFlowRepositoryHbm">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+	<!-- Objeto utilizado para acceder a los diferentes repositorios -->
+	<bean id="repositoryLocator" class="org.exnihilo.Item.repositories.RepositoryLocator"
+		factory-method="getInstance">
+		<property name="itemSysRepository">
+			<ref local="itemSysRepository" />
+		</property>
+		<property name="equipoRepository">
+			<ref local="equipoRepository" />
+		</property>
+		<property name="estadoRepository">
+			<ref local="estadoRepository" />
+		</property>
+
+		<property name="itemTypeRepository">
+			<ref local="itemTypeRepository" />
+		</property>
+		<property name="_itensRepository">
+			<ref local="itensRepository" />
+		</property>
+		<property name="proyectosSoftware">
+			<ref local="proyectosSoftwareRepository" />
+		</property>
+		<property name="puestoRepository">
+			<ref local="puestoRepository" />
+		</property>
+		<property name="workFlowRepository">
+			<ref local="workFlowRepository" />
+		</property>
+		<property name="_usuarioRepository">
+			<ref local="usuarioRepository" />
+		</property>
+	</bean>
+	<!-- Servicios -->
+
+
+	<!-- Proxy trasaccional para los servicios de usuarios -->
+	<bean id="usersServiceTarget" class="org.exnihilo.Item.services.mock.UserServiceImpl">
+
+	</bean>
+
+
+	<bean id="usersService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="usersServiceTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Proxy trasaccional para los servicios de ItemType -->
+	<bean id="itemTypeTarget" class="org.exnihilo.Item.services.mock.ItemTypeServiceImpl">
+
+	</bean>
+
+	<bean id="itemTypeService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="itemTypeTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Proxy trasaccional para los servicios de Item -->
+	<bean id="itemTarget" class="org.exnihilo.Item.services.mock.ItemServiceImpl">
+
+	</bean>
+
+
+	<bean id="itemService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="itemTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRES_NEW</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Proxy trasaccional para los servicios de Estado -->
+	<bean id="estadoTarget" class="org.exnihilo.Item.services.mock.EstadoServiceImpl">
+
+	</bean>
+
+
+	<bean id="estadoService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="estadoTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Proxy trasaccional para los servicios de Estado -->
+	<bean id="workflowarget" class="org.exnihilo.Item.services.mock.WorkFlowServicesImpl">
+
+	</bean>
+
+
+	<bean id="workflowService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="workflowarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Proxy trasaccional para los servicios de Estado -->
+	<bean id="projectTarget" class="org.exnihilo.Item.services.mock.ProyectoServiceImpl">
+
+	</bean>
+
+
+	<bean id="projectService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="projectTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Proxy trasaccional para los servicios de Estado -->
+	<bean id="equipoTarget" class="org.exnihilo.Item.services.mock.EquipoServiceImpl">
+
+	</bean>
+
+
+	<bean id="equipoService"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="target">
+			<ref local="equipoTarget" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+		<property name="preInterceptors">
+			<list>
+				<bean class="org.exnihilo.Item.spring.ServiceExceptionInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- Objeto utilizado para acceder a los diferentes servicios -->
+	<bean id="serviceLocator" class="org.exnihilo.Item.services.ServiceLocator"
+		factory-method="getInstance">
+		<property name="userService">
+			<ref local="usersService" />
+		</property>
+
+		<property name="estadosService">
+			<ref local="estadoService" />
+		</property>
+
+		<property name="itemService">
+			<ref local="itemService" />
+		</property>
+
+		<property name="itemTypeService">
+			<ref local="itemTypeService" />
+		</property>
+
+		<property name="workflowService">
+			<ref local="workflowService" />
+		</property>
+
+		<property name="proyectoService">
+			<ref local="projectService" />
+		</property>
+
+		<property name="equipoService">
+			<ref local="equipoService" />
+		</property>
+	</bean>
+
+</beans>

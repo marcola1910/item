@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.exnihilo.Item.model.Nodo">
+	<class name="org.exnihilo.Item.model.Nodo" table="NODO" catalog="itemproj"
+		dynamic-update="true">
+
+		<id name="dbId" type="java.lang.Integer">
+			<column name="dbId_nodo" />
+			<generator class="identity" />
+		</id>
+
+		<property name="oid" type="string" />
+
+		<property name="Name" type="string" />
+		<property name="version" type="java.lang.Integer" />
+
+		<bag name="proxEstado" table="NODO_PROX" lazy="extra" catalog="itemproj"
+			cascade="all">
+			<key column="dbId_equipo" not-null="false" />
+			<many-to-many class="org.exnihilo.Item.model.Nodo" />
+		</bag>
+
+
+	</class>
+</hibernate-mapping> 

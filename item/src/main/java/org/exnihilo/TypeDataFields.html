@@ -1,0 +1,46 @@
+<wicket:panel>
+
+	<form wicket:id="typeForm">
+		<p>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+
+			</tr>
+			<tr>
+				<td>Oid ::</td>
+				<td><span wicket:id="Oid"> New One </span></td>
+
+			</tr>
+
+			<tr>
+				<td>Titulo ::</td>
+				<td><input title="Titulo" type="text" name="Titulo"
+					class="username" wicket:id="Titulo" /></td>
+
+			</tr>
+
+			<tr>
+				<td>Descripcion ::</td>
+				<td><input title="Descripcion" type="text" name="Descripcion"
+					class="username" wicket:id="Descripcion" /></td>
+			</tr>
+			<tr>
+				<td>WorkFlow::</td>
+				<td><select name="Workflow" wicket:id="Workflow"
+					class="username"></select></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><input type="submit" name="Login"
+					class="submit" value="Save" tabindex="3" /></td>
+			</tr>
+			<tr>
+				<td><span wicket:id="mfeed"> SNAPSHOT </span></td>
+				<td></td>
+			</tr>
+		</table>
+		</p>
+	</form>
+</wicket:panel>

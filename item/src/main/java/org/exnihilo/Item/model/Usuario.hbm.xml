@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.exnihilo.Item.model.Usuario">
+	<class name="org.exnihilo.Item.model.Usuario" optimistic-lock="version"
+		table="USUARIO" discriminator-value="U" catalog="itemproj"
+		dynamic-update="true">
+
+		<id name="dbId" type="java.lang.Integer">
+			<column name="dbId_usuario" />
+			<generator class="identity" />
+		</id>
+		<version column="VERSION" name="version" />
+
+		<property name="oid" type="string" />
+
+		<property name="nombre" type="string">
+			<column name="NOMBRE" length="255" not-null="true" />
+		</property>
+
+		<property name="email" type="string">
+			<column name="EMAIL" length="255" not-null="true" />
+		</property>
+
+		<property name="password" type="string">
+			<column name="PASSWORD" length="255" />
+		</property>
+
+		<property name="telefono" type="string">
+			<column name="TELEFONO" />
+		</property>
+
+		<joined-subclass name="org.exnihilo.Item.model.MiembroEquipo"
+			extends="Usuario" catalog="itemproj">
+			<key column="dbId_usuario" />
+			<many-to-one name="puesto" lazy="proxy" cascade="all"
+				column="puesto" class="org.exnihilo.Item.model.Puesto" />
+		</joined-subclass>
+
+		<joined-subclass name="org.exnihilo.Item.model.Administrador"
+			extends="Usuario" catalog="itemproj">
+			<key column="dbId_usuario" />
+			<property name="oid" />
+			<property name="nombre" />
+		</joined-subclass>
+
+	</class>
+</hibernate-mapping> 

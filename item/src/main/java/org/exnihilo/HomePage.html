@@ -1,0 +1,26 @@
+<wicket:extend>
+	<br />
+	<h2>Trabajo final DDBBOO Prof Javier Bazzocco</h2>
+	<p>Click en las opciones arriba para probar las funcionalidades del
+		sistema.</p>
+
+	<h2>Tecnologia Utilizada</h2>
+	<p>Este site ha sido creado con Apache Wicket para manejo de Pure
+		Web utilizando POJO y patrones DDD. Tales como Service Locator,
+		repository y root object. Bajo la capa orientada a Objetos del modelo
+		se utiliza Hibernate mapeando los estados de los objetos a una base de
+		datos relacional MySQL. El sistema es configurable en lo que dice
+		respeto a motores de base de datos, la idea es agregregar
+		implementaciones de repositorios y servicios a una base de objetos
+		Cache.</p>
+	<p>Lo que dice respeto a control de sesiones, cada servicio cuenta
+		con un contextmanager que mantiene la atomicidad. La logica de
+		concurrencia utilizada es "Lo primero gana". Utilizando control de
+		versiones de cambios evitando lock de datos y deadlocks.</p>
+	<h2></h2>
+	<div id="stock">
+		<img
+			src="wicket/resource/org.exnihilo.HomePage/Item/application/images/powered.png"
+			alt="Stock Images!" />&nbsp;&nbsp;&nbsp;
+	</div>
+</wicket:extend>

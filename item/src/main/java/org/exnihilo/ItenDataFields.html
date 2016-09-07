@@ -1,0 +1,81 @@
+<wicket:panel>
+	<form wicket:id="itenForm">
+		<p>
+		<table>
+			<tr>
+				<th></th>
+				<th></th>
+
+			</tr>
+			<tr>
+				<td>Oid ::</td>
+				<td><span wicket:id="Oid"> New One </span></td>
+
+			</tr>
+
+			<tr>
+				<td>Fecha ::</td>
+				<td><span wicket:id="Fecha"> Fecha </span></td>
+
+			</tr>
+			<tr>
+				<td>Titulo::</td>
+				<td><input title="Titulo" type="text" name="Titulo"
+					class="username" wicket:id="Titulo" /></td>
+			</tr>
+
+			<tr>
+				<td>Tipo ::</td>
+				<td><select name="Tipo" wicket:id="ItemType" class="username"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>Proyecto ::</td>
+				<td><select name="Proyecto" wicket:id="Proyecto"
+					class="username"></select></td>
+			</tr>
+			<tr>
+				<td>Asignado ::</td>
+				<td><select name="AsignadoItem" wicket:id="Asignado"
+					class="username"></select></td>
+			</tr>
+			<tr>
+				<td>Estado Actual ::</td>
+				<td><b><span style="font-size: 200%"
+						wicket:id="EstadoActual"></span> </b></td>
+			</tr>
+			<tr>
+				<td>Prox Estados Habilitados ::</td>
+				<td><select name="Estado" wicket:id="Estado" class="username"></select>
+				</td>
+			</tr>
+			<tr>
+				<td>Descripcion ::</td>
+				<td><textarea wicket:id="Descripcion" rows="6" cols="40">  </textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Historial ::</td>
+				<td>
+					<ul>
+						<li wicket:id="Historiallst"></li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td>Version ::</td>
+				<td><span wicket:id="Version"> </span></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><input type="submit" name="Login"
+					class="submit" value="Save" tabindex="3" /></td>
+			</tr>
+			<tr>
+				<td><span wicket:id="mfeed"> SNAPSHOT </span></td>
+				<td></td>
+			</tr>
+		</table>
+		</p>
+	</form>
+</wicket:panel>

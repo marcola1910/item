@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.exnihilo.Item.model.Historial">
+	<class name="org.exnihilo.Item.model.Historial" table="HISTORIAL"
+		catalog="itemproj" dynamic-update="true">
+
+		<id name="dbId" type="java.lang.Integer">
+			<column name="dbId_hist" />
+			<generator class="identity" />
+		</id>
+
+		<property name="oid" type="string" />
+
+		<property name="fecha" />
+		<property name="registro" />
+		<property name="histoID" />
+
+		<many-to-one name="respAsig" lazy="proxy" cascade="all"
+			column="respasig" class="org.exnihilo.Item.model.MiembroEquipo" />
+
+		<property name="version" type="java.lang.Integer" />
+
+	</class>
+</hibernate-mapping> 

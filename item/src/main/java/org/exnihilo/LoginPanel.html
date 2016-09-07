@@ -1,0 +1,24 @@
+<wicket:panel>
+	<div id="loginwelcome">Welcome</div>
+	<div id="loggoutlink" align="center">
+		<a wicket:id="loggout">Logout</a>
+	</div>
+	<form wicket:id="loginForm">
+		<p>
+			<input title="username" name="username" class="username"
+				value="Username" wicket:id="username"
+				onclick="if ( value == 'Username' ) { value = ''; }" /> <input
+				name="password" type="password" class="password" title="password"
+				value="Password" wicket:id="password" id="password"
+				onclick="if ( value == 'Password' ) { value = ''; }" /> <input
+				type="submit" name="Login" class="submit" value="login" tabindex="3" />
+		</p>
+		<p>
+			<span wicket:id="loginStatus"></span>
+		</p>
+	</form>
+
+	<span wicket:id="mfeed"> SNAPSHOT </span>
+
+
+</wicket:panel>
