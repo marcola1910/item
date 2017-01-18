@@ -1,26 +1,51 @@
 <wicket:extend>
 	<br />
-	<h2>Trabajo final DDBBOO Prof Javier Bazzocco</h2>
-	<p>Click en las opciones arriba para probar las funcionalidades del
-		sistema.</p>
+	<h2>Protótipo de tecnologia</h2>
+	<p>
+		Este site foi criado como prova de conceito de uma arquitetura que
+		separa totalmente a camada de dados da camada de negócio. A grande
+		vantagem é a de oferecer um desenho mais flexível por poder aplicar os
+		princípios da orientação a objetos, além de transparência com o banco
+		de dados tornando a lógica independente do motor de base de dados.
+		Podendo funcionar até mesmo puramente na memória sem reescrever uma
+		linha de código. <BR />
+	</p>
+	<p>
+		Isso também auxilia nos testes funcionais, por estar fora do banco de
+		dados podemos armar set de dados de entrada mais personalizados e mais
+		facilmente. <BR /> Os princípios que foram seguidos são os do
+		Domain-Driven-Development e os padrões de desenho do gang of four.
+		Além de utilizar alguns padrões de Martin Fowler descritos no livro :
+		Patterns of Enterprise Application Architecture facilitando a injeção
+		de dependências permitindo IoC (inversão de controle) Tais como: <BR />
+	<ul>
+		<li>Root Object</li>
+		<li>Service Locator</li>
+		<li>Repository</li>
+		<li>Repository Locator</li>
+	</ul>
+	</p>
 
-	<h2>Tecnologia Utilizada</h2>
-	<p>Este site ha sido creado con Apache Wicket para manejo de Pure
-		Web utilizando POJO y patrones DDD. Tales como Service Locator,
-		repository y root object. Bajo la capa orientada a Objetos del modelo
-		se utiliza Hibernate mapeando los estados de los objetos a una base de
-		datos relacional MySQL. El sistema es configurable en lo que dice
-		respeto a motores de base de datos, la idea es agregregar
-		implementaciones de repositorios y servicios a una base de objetos
-		Cache.</p>
-	<p>Lo que dice respeto a control de sesiones, cada servicio cuenta
-		con un contextmanager que mantiene la atomicidad. La logica de
-		concurrencia utilizada es "Lo primero gana". Utilizando control de
-		versiones de cambios evitando lock de datos y deadlocks.</p>
+	<p>
+	<h2>Transações</h2>
+	<p>Por estar trabalhando neste momento com um motor relacional
+		MySQL e ACID, utilizamos o RootObject para que faça persistência por
+		alcance dentro de uma transação atômica. É dizer, que cada serviço do
+		sistema abre uma transação atômica, caso surja uma exceção o sistema
+		fará rollback.</p>
+
+	<h2>Concorrência</h2>
+	<p>Por meio da integração Hibernate e Spring podemos controlar o
+		fluxo de transações e configurar o regime de concorrência. Neste caso
+		está “O primeiro ganha”. Caso outro usuário em paralelo tome o dado
+		“sujo” o sistema se encarga de validar e mostrar a devida mensagem ao
+		ususario.</p>
+
 	<h2></h2>
-	<div id="stock">
-		<img
+	<div id="stock" align="center">
+		<img 
 			src="wicket/resource/org.exnihilo.HomePage/Item/application/images/powered.png"
-			alt="Stock Images!" />&nbsp;&nbsp;&nbsp;
+			alt="Stock Images!"
+			height="30%" width="30%" />&nbsp;&nbsp;&nbsp; "
 	</div>
 </wicket:extend>

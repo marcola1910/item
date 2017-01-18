@@ -1,7 +1,6 @@
 package org.exnihilo;
 
 import javax.servlet.http.HttpSession;
-
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.panel.Panel;
