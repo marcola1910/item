@@ -1,7 +1,13 @@
 package org.exnihilo;
 
+import java.util.Date;
+import java.util.Random;
+
+import org.exnihilo.Item.model.Administrador;
 import org.exnihilo.Item.model.ItemSys;
 import org.exnihilo.Item.model.ItemType;
+import org.exnihilo.Item.model.Nodo;
+import org.exnihilo.Item.model.WorkFlow;
 import org.exnihilo.Item.repositories.RepositoryLocator;
 import org.exnihilo.Item.repositories.impl.hibernate.EquipoRepositoryHbm;
 import org.exnihilo.Item.repositories.impl.hibernate.EstadoRepositoryHbm;
@@ -30,8 +36,22 @@ import org.exnihilo.Item.services.mock.ProyectoServiceImpl;
 import org.exnihilo.Item.services.mock.PuestoServiceImpl;
 import org.exnihilo.Item.services.mock.UserServiceImpl;
 import org.exnihilo.Item.services.mock.WorkFlowServicesImpl;
+import org.exnihilo.Item.util.DTOFactory;
+import org.exnihilo.Item.util.EquipoDTO;
+import org.exnihilo.Item.util.IDGenerator;
+import org.exnihilo.Item.util.ItemDTO;
+import org.exnihilo.Item.util.ItemTypeDTO;
+import org.exnihilo.Item.util.MiembroEquipoDTO;
+import org.exnihilo.Item.util.NodoDTO;
+import org.exnihilo.Item.util.ProyectoDTO;
+import org.exnihilo.Item.util.PuestoDTO;
+import org.exnihilo.Item.util.WorkFlowDTO;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
 
 public class HbmInitStrategy extends InitStrategy {
 
@@ -39,7 +59,7 @@ public class HbmInitStrategy extends InitStrategy {
 	ServiceRegistry serviceRegistry;
 	SessionFactory sessionFactory;//
 	org.hibernate.Session session;
-	private static ItemType mItem;
+	private static ItemSys mItem;
 	
 	private static WicketApplication webapp;
 	
@@ -49,35 +69,18 @@ public class HbmInitStrategy extends InitStrategy {
 	}
 
 	public void initModel() {
-				
+		
 		/*
-		 * 
-		
-		
 		Configuration configuration = new Configuration();
-		configuration.configure("hibernate.cfg.xml");
-		serviceRegistry = new ServiceRegistryBuilder().applySettings(
-				configuration.getProperties()).buildServiceRegistry();
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-
-		
-		session = sessionFactory.openSession();
-		
-		session = sessionFactory.getCurrentSession();
-		
-		
-		Configuration configuration = HbmTxDecorator.getConfiguration();
+		configuration.configure("hibernate.cfg.xml");		
+		StandardServiceRegistryBuilder ssrb = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
+        SessionFactory sessionFactory = configuration.buildSessionFactory(ssrb.build());
 		
 		configuration.setProperty("hibernate.hbm2ddl.auto", "create-drop");
 		
-		serviceRegistry = new ServiceRegistryBuilder().applySettings(
-				configuration.getProperties()).buildServiceRegistry();
-		
-		sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 		
 		session = sessionFactory.openSession();
 		
-		session = sessionFactory.getCurrentSession();
 		
 		new SchemaExport(configuration).create(true, true);
 
@@ -90,6 +93,9 @@ public class HbmInitStrategy extends InitStrategy {
 		
 		inimock.initRepositories();
 		inimock.initServices();
+		
+		org.hibernate.Transaction tx = session.beginTransaction();;
+		try {
 		
 		// Gonna set manually the Adm.. it is a cheat but it is only for test
 		Administrador mAdm = new Administrador();
@@ -428,9 +434,7 @@ public class HbmInitStrategy extends InitStrategy {
 
 		}
 
-		org.hibernate.Transaction tx = null;
-		try {
-			tx = sessionFactory.getCurrentSession().beginTransaction();
+		
 			//graba el set inicial de datos con el root object y con sus dependencias.
 			session.save(RepositoryLocator.getInstance().getItemSysRepository().findItemSys());
 			
@@ -443,9 +447,12 @@ public class HbmInitStrategy extends InitStrategy {
 				tx.rollback();
 		}
 		
-		session.close();
-		session.disconnect();
-		Configuration configuration = new Configuration();
+		  session.flush();  
+		  session.close();  
+		
+		*/
+		
+		/*Configuration configuration = new Configuration();
 		configuration.configure("hibernate.cfg.xml");
 		serviceRegistry = new ServiceRegistryBuilder().applySettings(
 				configuration.getProperties()).buildServiceRegistry();

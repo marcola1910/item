@@ -4,7 +4,7 @@
 	<session-factory>
 
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://itemproj.c9t1xsa78fgh.sa-east-1.rds.amazonaws.com</property>
+		<property name="connection.url">jdbc:mysql://gaviao.cxoxyehtkiaz.sa-east-1.rds.amazonaws.com</property>
 		<property name="connection.username">marcolino</property>
 		<property name="connection.password">vuela2015</property>
 
@@ -13,7 +13,7 @@
 		<property name="current_session_context_class">thread</property>
 		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
 		<property name="show_sql">true</property>
-		<property name="hbm2ddl.auto">validate</property>
+		<property name="hbm2ddl.auto">create-drop</property>
 
 		<property name="c3p0.acquire_increment">1</property>
 		<property name="c3p0.idle_test_period">120</property> <!-- seconds -->
@@ -31,7 +31,7 @@
 		<mapping resource="org/exnihilo/Item/model/Puesto.hbm.xml"></mapping>
 		<mapping resource="org/exnihilo/Item/model/Item.hbm.xml"></mapping>
 		<mapping resource="org/exnihilo/Item/model/Historial.hbm.xml"></mapping>
-		<mapping resource="org/exnihilo/Item/model/Workflow.hbm.xml"></mapping>
+		<mapping resource="org/exnihilo/Item/model/WorkFlow.hbm.xml"></mapping>
 		<mapping resource="org/exnihilo/Item/model/ItemSys.hbm.xml"></mapping>
 
 	</session-factory>

@@ -43,9 +43,9 @@ public class WicketApplication extends WebApplication {
 	@Override
 	public void init() {
 		super.init();
-
+		/*
 		// 1 - Set up the persistence strategy
-		/*this.inimode = IniMode.valueOf(getServletContext().getInitParameter("InitMode") ); 
+		this.inimode = IniMode.valueOf(getServletContext().getInitParameter("InitMode") ); 
 		
 		switch (this.inimode ) {
 	        case MOCK:  this.inistrategy = new MockInitStrategy();
@@ -67,11 +67,12 @@ public class WicketApplication extends WebApplication {
 		this.inistrategy.initServices();
 		
 		// 4 - configure the repositories locator for mock
-		this.inistrategy.initRepositories();*/
+		this.inistrategy.initRepositories();
 		
 		@SuppressWarnings("unused")
 		int x = 0;
 		
+		*/
 	}
 
 	public String getModalTransfer() {
